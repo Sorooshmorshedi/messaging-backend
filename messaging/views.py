@@ -1,4 +1,5 @@
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -484,7 +485,6 @@ def LogoutView(request):
         logout(request)
         return redirect('http://127.0.0.1:3000')
 
-
 class Log(APIView):
     def post(self, request):
         username = request.data['username']
@@ -511,3 +511,15 @@ class Sign(APIView):
             user.save()
             login(request, user)
             return Response({'id': user.id}, status=status.HTTP_200_OK)
+
+@csrf_exempt
+def LoginView(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('http://127.0.0.1:3000/profile/' + str(user.id))
+    elif request.method == 'GET':
+        form = AuthenticationForm()
+    return render(request, 'messaging/base.html', {'form': form})

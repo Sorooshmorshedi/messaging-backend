@@ -1,0 +1,58 @@
+{% load static %}
+<DOCTYPE html>
+    <html lang="eng" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            {% block title %}
+                Login
+            {% endblock %}
+        </title>
+        <link rel="stylesheet" href="{% static "messaging/login.css" %}">
+    </head>
+    <body>
+    <div class="box">
+        <form class="sign" action={% url 'messaging:login' %} method="post">
+            <h1>MessagingApp</h1>
+            {% csrf_token %}
+            {{ form }}
+        <input  type="submit" value="login" style="background: #ffaa00; border-radius: 50px; margin-left: 250px; margin-top: 20px">
+        </form>
+    </div>
+
+    </body>
+    </html>
+    <style scope>
+        span.helptext{
+            color: snow;
+        }
+        form.sign {
+            margin-top: 200px;
+            align-items: center;
+            border-radius: 120px 150px 90px 190px;
+            background-color: #33322f;
+            width : 350px ;
+            height : 250px;
+            padding: 50px;
+            position  :center ;
+            margin-top: 100px;
+            margin-left: 350px;
+        }
+        h1{
+            margin-bottom: 20px;
+            color: snow;
+        }
+
+        input{
+            color: #1b1b1b;
+            background-color: whitesmoke;
+            padding: 10px;
+            margin: 5px;
+
+        }
+        label{
+            color: #fcd356;
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>

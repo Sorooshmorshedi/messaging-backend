@@ -1,11 +1,10 @@
-from django.contrib.auth.views import LoginView
 from django.urls import path
 from messaging.views import UserApiView, UserDetail, MessageApiView, MessageDetail, SearchUser, AdminApiView, \
     AdminDetail, LikeApiView, LikeDetail, SeenApiView, ArchiveApiView, ChannelApiView, ChannelDetail, GroupDetail, \
     GroupApiView, Log, Sign, UserEdit, AccountChats, AccountGroups, AccountChannels, AccountPv, Unlike, GroupChats, \
     Groupmembers, ChannelChats, ChannelMembers, AddChannelMember, JoinChannel, Invielink, LeaveChannel, ChannelAdress, \
-    AddGroupMember, LeaveGroup, JoinGroup, GInvielink, GroupEdit, ChannelAdmins, GroupAdmins
-
+    AddGroupMember, LeaveGroup, JoinGroup, GInvielink, GroupEdit, ChannelAdmins, GroupAdmins, LoginView
+app_name = 'messaging'
 urlpatterns = [
     path('user', UserApiView.as_view(), name='UserApi'),
     path('user/<int:pk>/', UserDetail.as_view(), name='UserDetail'),
@@ -27,7 +26,7 @@ urlpatterns = [
     path('group', GroupApiView.as_view(), name='GroupApi'),
     path('group/<int:pk>/', GroupDetail.as_view(), name='GroupDetail'),
     path('groupE/<int:pk>/', GroupEdit.as_view(), name='GroupEdit'),
-    path('log', Log.as_view(), name='Log'),
+    path('log', LoginView, name='login'),
     path('sign', Sign.as_view(), name='sign'),
     path('account/chats/<int:pk>/', AccountChats.as_view(), name='AccountChats'),
     path('account/groups/<int:pk>/', AccountGroups.as_view(), name='AccountGroups'),
