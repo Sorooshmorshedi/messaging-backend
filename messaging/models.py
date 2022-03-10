@@ -130,6 +130,8 @@ class Message(models.Model):
     channel = models.ForeignKey(Channel, on_delete=CASCADE, related_name="message", null=True, blank=True)
     group = models.ForeignKey(Group, on_delete=CASCADE, related_name="message", null=True, blank=True)
     date = models.DateTimeField(auto_now=True)
+    reply = models.ForeignKey('self', on_delete=models.CASCADE, related_name="replies", blank=True, null=True)
+
 
     def __str__(self):
         return self.sender.username

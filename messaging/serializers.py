@@ -18,6 +18,8 @@ class UserEditSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
+    replay_to = serializers.CharField(source='reply.sender.username', read_only=True)
+    replay_text = serializers.CharField(source='reply.text', read_only=True)
     pic = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
     file = serializers.FileField(max_length=None, use_url=True, allow_null=True, required=False)
     sender_name = serializers.CharField(source='sender.username', read_only=True)

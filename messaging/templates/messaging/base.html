@@ -8,7 +8,7 @@
                 Login
             {% endblock %}
         </title>
-        <link rel="stylesheet" href="{% static "messaging/login.css" %}">
+        <link rel="stylesheet" href="{% static "messaging/log.css" %}">
     </head>
     <body>
     <div class="box">
@@ -16,7 +16,7 @@
             <h1>MessagingApp</h1>
             {% csrf_token %}
             {{ form }}
-        <input  type="submit" value="login" style="background: #ffaa00; border-radius: 50px; margin-left: 250px; margin-top: 20px">
+        <input  type="submit" value="login" style="background: lightskyblue; border-radius: 50px; margin-left: 250px; margin-top: 20px">
         </form>
     </div>
 
@@ -36,7 +36,7 @@
             padding: 50px;
             position  :center ;
             margin-top: 100px;
-            margin-left: 350px;
+            margin-left: 150px;
         }
         h1{
             margin-bottom: 20px;
@@ -51,7 +51,7 @@
 
         }
         label{
-            color: #fcd356;
+            color: lightskyblue;
             padding: 5px;
             margin: 5px;
         }
