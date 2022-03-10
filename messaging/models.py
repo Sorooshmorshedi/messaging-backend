@@ -104,9 +104,17 @@ class Admin(models.Model):
         return "{} admin".format(self.user.username)
     def save(self, *args, **kwargs):
         if self.channel and not self.group:
+            members = self.channel.joined_users.all()
+            if self.user not in members:
+                self.channel.joined_users.add(self.user)
+                self.channel.save()
             if Admin.objects.filter(user=self.user,channel=self.channel):
                 raise  ValidationError('admin added once')
         if not self.channel and  self.group:
+            members = self.group.members.all()
+            if self.user not in members:
+                self.group.members.add(self.user)
+                self.group.save()
             if Admin.objects.filter(user=self.user,group=self.group):
                 raise  ValidationError('admin added once')
         super().save(*args, **kwargs)

@@ -252,7 +252,9 @@ class ChannelDetail(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        query = self.get_object(pk)
+        query = Channel.objects.filter(pk=pk).first()
+        admins = Admin.objects.filter(channel=query)
+        admins.delete()
         query.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -305,7 +307,9 @@ class GroupDetail(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        query = self.get_object(pk)
+        query = Group.objects.filter(pk=pk).first()
+        admins = Admin.objects.filter(group=query)
+        admins.delete()
         query.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
