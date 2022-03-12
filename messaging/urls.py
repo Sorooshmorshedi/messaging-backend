@@ -3,7 +3,8 @@ from messaging.views import UserApiView, UserDetail, MessageApiView, MessageDeta
     AdminDetail, LikeApiView, LikeDetail, SeenApiView, ArchiveApiView, ChannelApiView, ChannelDetail, GroupDetail, \
     GroupApiView, Log, Sign, UserEdit, AccountChats, AccountGroups, AccountChannels, AccountPv, Unlike, GroupChats, \
     Groupmembers, ChannelChats, ChannelMembers, AddChannelMember, JoinChannel, Invielink, LeaveChannel, ChannelAdress, \
-    AddGroupMember, LeaveGroup, JoinGroup, GInvielink, GroupEdit, ChannelAdmins, GroupAdmins, LoginView
+    AddGroupMember, LeaveGroup, JoinGroup, GInvielink, GroupEdit, ChannelAdmins, GroupAdmins, LoginView, LogOut
+
 app_name = 'messaging'
 urlpatterns = [
     path('user', UserApiView.as_view(), name='UserApi'),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('groupE/<int:pk>/', GroupEdit.as_view(), name='GroupEdit'),
     path('log', LoginView, name='login'),
     path('sign', Sign.as_view(), name='sign'),
+    path('logout', LogOut, name='LogOut'),
     path('account/chats/<int:pk>/', AccountChats.as_view(), name='AccountChats'),
     path('account/groups/<int:pk>/', AccountGroups.as_view(), name='AccountGroups'),
     path('account/channels/<int:pk>/', AccountChannels.as_view(), name='AccountChannels'),

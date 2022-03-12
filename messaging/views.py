@@ -514,7 +514,7 @@ class Sign(APIView):
             user.set_password(password1)
             user.save()
             login(request, user)
-            return Response({'id': user.id}, status=status.HTTP_200_OK)
+            return redirect('http://127.0.0.1:8000/api/log')
 
 @csrf_exempt
 def LoginView(request):
@@ -523,7 +523,18 @@ def LoginView(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('http://127.0.0.1:3000/profile/' + str(user.id))
+            return redirect('http://127.0.0.1:3000/message/' + str(user.id))
     elif request.method == 'GET':
         form = AuthenticationForm()
     return render(request, 'messaging/base.html', {'form': form})
+
+
+
+@csrf_exempt
+def LogOut(request):
+    if request.method == 'GET':
+        logout(request)
+        return redirect('http://127.0.0.1:8000/api/log')
+    elif request.method == 'POST':
+        logout(request)
+        return redirect('http://127.0.0.1:3000')
