@@ -25,6 +25,8 @@ class MessageSerializer(serializers.ModelSerializer):
     sender_name = serializers.CharField(source='sender.username', read_only=True)
     sender_pic = serializers.ImageField(source='sender.profile_picture', read_only=True)
     reciver_name = serializers.CharField(source='receiver.username', read_only=True)
+    group_name = serializers.CharField(source='group.name', read_only=True)
+    channel_name = serializers.CharField(source='channel.name', read_only=True)
 
     class Meta:
         model = Message

@@ -327,6 +327,18 @@ class AccountChats(APIView):
         serializer = UserSerializer(friends, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+class AccountArchived(APIView):
+    def get(self, request, pk):
+        account = User.objects.get(pk=pk)
+        archives = Archived.objects.filter(user=account)
+        messages = []
+        for archive in archives:
+            messages.append(archive.message)
+        serializer = MessageSerializer(messages, many=True, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 class AccountPv(APIView):
     def get(self, request, pk1, pk2):
         account = User.objects.get(pk=pk1)
@@ -387,6 +399,13 @@ class ChannelSeen(APIView):
                 seen.save()
         return Response({'ok': 1}, status=status.HTTP_200_OK)
 
+class UnArchive(APIView):
+    def get(self, request, pk1, pk2):
+        message = Message.objects.get(pk=pk1)
+        user = User.objects.get(pk=pk2)
+        archive = Archived.objects.filter(user=user, message=message)
+        archive.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class GroupSeen(APIView):
     def get(self, request, pk1, pk2):
