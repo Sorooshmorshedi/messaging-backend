@@ -3,7 +3,8 @@ from messaging.views import UserApiView, UserDetail, MessageApiView, MessageDeta
     AdminDetail, LikeApiView, LikeDetail, SeenApiView, ArchiveApiView, ChannelApiView, ChannelDetail, GroupDetail, \
     GroupApiView, Log, Sign, UserEdit, AccountChats, AccountGroups, AccountChannels, AccountPv, Unlike, GroupChats, \
     Groupmembers, ChannelChats, ChannelMembers, AddChannelMember, JoinChannel, Invielink, LeaveChannel, ChannelAdress, \
-    AddGroupMember, LeaveGroup, JoinGroup, GInvielink, GroupEdit, ChannelAdmins, GroupAdmins, LoginView, LogOut
+    AddGroupMember, LeaveGroup, JoinGroup, GInvielink, GroupEdit, ChannelAdmins, GroupAdmins, LoginView, LogOut, \
+    ChannelSeen, GroupSeen, MessageSeen
 
 app_name = 'messaging'
 urlpatterns = [
@@ -35,9 +36,13 @@ urlpatterns = [
     path('account/channels/<int:pk>/', AccountChannels.as_view(), name='AccountChannels'),
     path('account/pv/<int:pk1>/<int:pk2>/', AccountPv.as_view(), name='AccountPv'),
     path('unlike/<int:pk1>/<int:pk2>/', Unlike.as_view(), name='unlike'),
+    path('seen/channel/<int:pk1>/<int:pk2>/', ChannelSeen.as_view(), name='ChannelSeen'),
+    path('seen/group/<int:pk1>/<int:pk2>/', GroupSeen.as_view(), name='GroupSeen'),
     path('group/chats/<int:pk1>', GroupChats.as_view(), name='GroupChats'),
     path('group/members/<int:pk1>', Groupmembers.as_view(), name='Groupmembers'),
     path('channel/chats/<int:pk1>', ChannelChats.as_view(), name='ChannelChats'),
+    path('group/chats/<int:pk1>', GroupSeen.as_view(), name='GroupSeen'),
+    path('message/seen/<int:pk1>', MessageSeen.as_view(), name='MessageSeen'),
     path('channel/members/<int:pk1>', ChannelMembers.as_view(), name='ChannelMembers'),
     path('channel/join/<int:pk1>/<int:pk2>/', JoinChannel.as_view(), name='JoinChannel'),
     path('group/join/<int:pk1>/<int:pk2>/', JoinGroup.as_view(), name='JoinGroup'),

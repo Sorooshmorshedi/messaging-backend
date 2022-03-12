@@ -345,6 +345,8 @@ class GroupChats(APIView):
         messages = Message.objects.filter(group=group).order_by('date')
         serializer = MessageSerializer(messages, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 class Groupmembers(APIView):
     def get(self, request, pk1):
         group = Group.objects.get(pk=pk1)
@@ -352,6 +354,12 @@ class Groupmembers(APIView):
         serializer = UserSerializer(members, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class MessageSeen(APIView):
+    def get(self, request, pk1):
+        message = Message.objects.get(pk=pk1)
+        seen = Seen.objects.filter(message=message)
+        serializer = SeenSerializer(seen, many=True, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class AccountGroups(APIView):
     def get(self, request, pk):
@@ -366,6 +374,30 @@ class ChannelChats(APIView):
         messages = Message.objects.filter(channel=channel).order_by('date')
         serializer = MessageSerializer(messages, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ChannelSeen(APIView):
+    def get(self, request, pk1, pk2):
+        channel = Channel.objects.get(pk=pk1)
+        user = User.objects.get(pk=pk2)
+        messages = Message.objects.filter(channel=channel)
+        for message in messages:
+            if not Seen.objects.filter(message=message,user=user):
+                seen = Seen.objects.create(message=message,user=user)
+                seen.save()
+        return Response({'ok': 1}, status=status.HTTP_200_OK)
+
+
+class GroupSeen(APIView):
+    def get(self, request, pk1, pk2):
+        group = Group.objects.get(pk=pk1)
+        user = User.objects.get(pk=pk2)
+        messages = Message.objects.filter(group=group)
+        for message in messages:
+            if not Seen.objects.filter(message=message,user=user):
+                seen = Seen.objects.create(message=message,user=user)
+                seen.save()
+        return Response({'ok': 1}, status=status.HTTP_200_OK)
 
 class ChannelMembers(APIView):
     def get(self, request, pk1):
