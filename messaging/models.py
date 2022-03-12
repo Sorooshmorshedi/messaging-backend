@@ -126,15 +126,21 @@ class Message(models.Model):
     text = models.CharField(max_length=500, null=True, blank=True)
     pic = models.ImageField(default='', upload_to='store_image/', null=True, blank=True)
     sender = models.ForeignKey(User, on_delete=CASCADE, related_name="message")
+    seened  =models.BooleanField(default=False)
     receiver = models.ForeignKey(User, on_delete=CASCADE, related_name="receive_message", null=True, blank=True)
     channel = models.ForeignKey(Channel, on_delete=CASCADE, related_name="message", null=True, blank=True)
     group = models.ForeignKey(Group, on_delete=CASCADE, related_name="message", null=True, blank=True)
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField(blank=True, null=True)
     reply = models.ForeignKey('self', on_delete=models.CASCADE, related_name="replies", blank=True, null=True)
-
 
     def __str__(self):
         return self.sender.username
+    def save(self, *args, **kwargs):
+        if not self.id:
+            import datetime
+            self.date = datetime.datetime.now()
+        super().save(*args, **kwargs)
+
 
 class Like(models.Model):
     message = models.ForeignKey(Message, on_delete=CASCADE, related_name="like")

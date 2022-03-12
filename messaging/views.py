@@ -332,6 +332,10 @@ class AccountPv(APIView):
         account = User.objects.get(pk=pk1)
         friend = User.objects.get(pk=pk2)
         messages = Message.objects.filter(Q(sender=account, receiver=friend)|Q(receiver=account, sender=friend)).order_by('date')
+        friend_messages = Message.objects.filter(receiver=account, sender=friend)
+        for message in friend_messages:
+            message.seened = True
+            message.save()
         serializer = MessageSerializer(messages, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -534,7 +538,7 @@ def LoginView(request):
 def LogOut(request):
     if request.method == 'GET':
         logout(request)
-        return redirect('http://127.0.0.1:8000/api/log')
+        return redirect('http://127.0.0.1:8000/api/logout')
     elif request.method == 'POST':
         logout(request)
         return redirect('http://127.0.0.1:3000')
