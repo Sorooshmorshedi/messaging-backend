@@ -135,7 +135,7 @@ class Message(models.Model):
         return self.sender.username
 
     def save(self, *args, **kwargs):
-        if not self.id:
+        if not self.id and not self.date:
             import datetime
             self.date = datetime.datetime.now()
         super().save(*args, **kwargs)

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'messaging',
     'corsheaders',
+    'webpush',
 
 ]
 
@@ -68,6 +69,7 @@ CORS_ALLOW_HEADERS =[
     "user-agent",
     "x-csrftoken",
     "x-requested-with",
+
 ]
 CSRF_TRUSTED_ORIGINS =[
     "http://127.0.0.1:3000"
@@ -143,6 +145,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+WEBPUSH_SETTINGS = {
+   "VAPID_PUBLIC_KEY": "BPitNq0QflQpWqUEB4AtUi4LMBMuZWqYEl_NndMLCpvZzGJ9UTEzzvDGeLFJdI7NEVAwGHcH2aZEw_qy7ykiVCg",
+   "VAPID_PRIVATE_KEY": "Q5o1eCG_mEeoOSxloS2AOvlxjoD9kRlHjnfo_sdcqZ4",
+   "VAPID_ADMIN_EMAIL": "devolopersoroosh@gmail.com"
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

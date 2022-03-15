@@ -1,10 +1,11 @@
-from django.urls import path
+from django.urls import path, include
+from django.views.generic import TemplateView
 from messaging.views import UserApiView, UserDetail, MessageApiView, MessageDetail, SearchUser, AdminApiView, \
     AdminDetail, LikeApiView, LikeDetail, SeenApiView, ArchiveApiView, ChannelApiView, ChannelDetail, GroupDetail, \
     GroupApiView, Log, Sign, UserEdit, AccountChats, AccountGroups, AccountChannels, AccountPv, Unlike, GroupChats, \
     Groupmembers, ChannelChats, ChannelMembers, AddChannelMember, JoinChannel, Invielink, LeaveChannel, ChannelAdress, \
     AddGroupMember, LeaveGroup, JoinGroup, GInvielink, GroupEdit, ChannelAdmins, GroupAdmins, LoginView, LogOut, \
-    ChannelSeen, GroupSeen, MessageSeen, AccountArchived, UnArchive
+    ChannelSeen, GroupSeen, MessageSeen, AccountArchived, UnArchive, home, send_push
 
 app_name = 'messaging'
 urlpatterns = [
@@ -55,7 +56,10 @@ urlpatterns = [
     path('channel/link/<str:token>', Invielink.as_view(), name='Invielink'),
     path('group/link/<str:token>', GInvielink.as_view(), name='GInvielink'),
     path('c/<str:link>', ChannelAdress.as_view(), name='ChannelAdress'),
-
+    path('h', home, name='home'),
+    path('send_push', send_push),
+    path('webpush/', include('webpush.urls')),
+    path('sw.js', TemplateView.as_view(template_name='sw.js', content_type='application/x-javascript')),
 
 ]
 
