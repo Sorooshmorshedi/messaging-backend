@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = 'django-insecure-ie33#fzf!-3@#)#ojxw5)z%37^*0a^!ty1v1+bsed*!_-e9zl&
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -45,21 +43,20 @@ INSTALLED_APPS = [
 
 ]
 
-
 CORS_ORIGIN_ALLOW_ALL = True
-CSRF_TRUSTED_ORIGINS=[
+CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:3000"
 
 ]
-CORS_ALLOW_METHODS =[
+CORS_ALLOW_METHODS = [
     "DELETE",
     "GET",
     "OPTIONS",
     "PATCH",
     "POST",
     "PUT",
-    ]
-CORS_ALLOW_HEADERS =[
+]
+CORS_ALLOW_HEADERS = [
     "accept",
     "accept-encoding",
     "authorization",
@@ -71,14 +68,13 @@ CORS_ALLOW_HEADERS =[
     "x-requested-with",
 
 ]
-CSRF_TRUSTED_ORIGINS =[
+CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:3000"
 ]
 
-CSRF_TRUSTED_ORIGINS=[
+CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:3000"
 ]
-
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -112,9 +108,7 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'sendix.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -125,7 +119,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -146,9 +139,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 WEBPUSH_SETTINGS = {
-   "VAPID_PUBLIC_KEY": "BPitNq0QflQpWqUEB4AtUi4LMBMuZWqYEl_NndMLCpvZzGJ9UTEzzvDGeLFJdI7NEVAwGHcH2aZEw_qy7ykiVCg",
-   "VAPID_PRIVATE_KEY": "Q5o1eCG_mEeoOSxloS2AOvlxjoD9kRlHjnfo_sdcqZ4",
-   "VAPID_ADMIN_EMAIL": "devolopersoroosh@gmail.com"
+    "VAPID_PUBLIC_KEY": "BPitNq0QflQpWqUEB4AtUi4LMBMuZWqYEl_NndMLCpvZzGJ9UTEzzvDGeLFJdI7NEVAwGHcH2aZEw_qy7ykiVCg",
+    "VAPID_PRIVATE_KEY": "Q5o1eCG_mEeoOSxloS2AOvlxjoD9kRlHjnfo_sdcqZ4",
+    "VAPID_ADMIN_EMAIL": "devolopersoroosh@gmail.com"
 }
 
 # Internationalization
@@ -156,12 +149,11 @@ WEBPUSH_SETTINGS = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
 USE_TZ = True
-
 
 AUTH_USER_MODEL = 'messaging.User'
 
@@ -174,7 +166,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'store_image')
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
